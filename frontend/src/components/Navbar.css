@@ -1,0 +1,37 @@
+/* frontend/src/components/Navbar.css */
+
+/* Glassmorphism Primary Button */
+.btn-glass-primary {
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  border: none;
+  color: white !important;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-glass-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* Glassmorphism Outline Button */
+.btn-glass-outline {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff !important;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-glass-outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+  transform: translateY(-2px);
+}

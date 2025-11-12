@@ -1,0 +1,71 @@
+.subjects-page {
+  position: relative;
+  min-height: 100vh;
+  /* Assuming you want to reuse the exam background image */
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 60px 0;
+}
+
+.overlay {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* brighter overlay */
+  z-index: 0;
+}
+
+.subjects-container {
+  position: relative;
+  z-index: 1;
+}
+
+.subject-heading {
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+/* Glass Card Styling - Reused from Exam.css */
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Form Input Styling - Reused from Exam.css */
+.subject-form input,
+.subject-form textarea,
+.form-control { /* Ensure all form controls adopt this style */
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.subject-form input::placeholder,
+.subject-form textarea::placeholder {
+  color: #ccc;
+}
+
+.subject-form .form-control:focus {
+  /* Use the yellow/warning color for focus glow */
+  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.4) !important;
+  border-color: #f0eee0 !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Subject Card Styling */
+.subject-card h5 {
+  font-weight: bold;
+}
+
+.subject-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Adjustments for the new button styling (using Bootstrap classes like btn-outline-light, btn-danger) */
+/* No specific button CSS needed here as the component now uses Bootstrap classes (e.g., btn-warning, btn-danger) */

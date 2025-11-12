@@ -1,0 +1,63 @@
+.exams-page {
+  position: relative;
+  min-height: 100vh;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 60px 0;
+}
+
+.overlay {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* brighter overlay */
+  z-index: 0;
+}
+
+.exams-container {
+  position: relative;
+  z-index: 1;
+}
+
+.exam-heading {
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.exam-card h5 {
+  font-weight: bold;
+}
+
+.exam-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Exam Form Styling */
+.exam-form input,
+.exam-form textarea {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.exam-form input::placeholder,
+.exam-form textarea::placeholder {
+  color: #ccc;
+}
+
+.exam-form .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.4);
+  border-color: #f0eee0;
+  background-color: rgba(255, 255, 255, 0.25);
+}

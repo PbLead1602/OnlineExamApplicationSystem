@@ -1,0 +1,212 @@
+/* Hero Section */
+.hero {
+  padding: 100px 0;
+  text-align: center;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55); /* overlay */
+  z-index: 0;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.hero .brand {
+  color: #ffd700;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #f1f1f1;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Hero Buttons Glow */
+.hero-btn {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.hero-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+/* Features Section */
+.features {
+  background: #111;
+  color: white;
+}
+
+/* Glass effect cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+}
+
+/* About Section */
+.about {
+  background: #f8f9fa;
+  color: #222;
+  padding: 80px 0;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background: #222;
+  color: #fff;
+}
+
+.about-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  min-height: 100vh;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.about-page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  z-index: 0;
+}
+
+.about-page .container {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  /*text-align: center;*/
+}
+
+.about-page h1, .about-page h2 {
+  font-weight: 700;
+  color: #ffd700; /* golden heading */
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+.about-page p {
+  font-size: 1.2rem;
+  color: #f1f1f1;
+  line-height: 1.6;
+}
+
+/* ----------------- Contact Page ----------------- */
+.contact-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  min-height: 100vh;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.contact-page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  z-index: 0;
+}
+
+.contact-page .container {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  /*text-align: center;*/
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.contact-card h2 {
+  color: #ffd700;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+}
+
+.contact-card label {
+  color: #f1f1f1;
+  font-weight: 500;
+}
+
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.contact-card input::placeholder,
+.contact-card textarea::placeholder {
+  color: #ddd;
+}
+
+.contact-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  background: #ffd700;
+  color: #222;
+  transition: all 0.3s ease;
+}
+
+.contact-card button:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}

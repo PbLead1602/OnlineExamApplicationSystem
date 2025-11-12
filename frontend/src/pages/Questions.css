@@ -1,0 +1,165 @@
+/* ======================================= */
+/* Questions Page Styles - Based on Exams */
+/* ======================================= */
+
+.questions-page {
+  position: relative;
+  min-height: 100vh;
+  /* Ensure the path to your image is correct */
+  background: url("../exam.jpg") no-repeat center center/cover; 
+  background-attachment: fixed;
+  padding: 60px 0;
+}
+
+.overlay {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Brighter overlay for better readability */
+  background: rgba(0, 0, 0, 0.7); 
+  z-index: 0;
+}
+
+.questions-container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px; /* Adjust max width as needed */
+  margin: auto;
+}
+
+.questions-heading {
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+
+/* Glass Card Style - Reused from Exams */
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Question List Item Styling */
+.list-group-item {
+  background: rgba(255, 255, 255, 0.05); /* Darker background for list items */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff; /* Ensure main text is white */
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.list-group-item h6 {
+  font-weight: bold;
+  color: #f2aa01; /* Subject name color - gold/warning */
+}
+
+.list-group-item p {
+  color: #f8f9fa; /* White/Light text for question text */
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.list-group-item small.text-muted {
+    color: #b0b0b0 !important; /* Lighter grey for options */
+}
+.list-group-item small.text-light {
+    color: #e9ecef !important; /* Light text for correct option/marks */
+}
+
+
+/* ======================================= */
+/* Form and Search Bar Elements (Inputs/Selects) */
+/* ======================================= */
+
+/* Target form controls in the search bar and form */
+.form-control {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff !important; /* Text color for input/select */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.form-control::placeholder {
+  color: #ccc; /* Placeholder text color */
+}
+
+/* Focus state */
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(242, 170, 1, 0.4); /* Gold shadow on focus */
+  border-color: #f2aa01; /* Gold border on focus */
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #fff !important;
+}
+
+/* Specific styling for dropdown (select) */
+.form-control select {
+    /* Required to override default browser background on select options */
+    color: #fff; 
+}
+.form-control option {
+    /* Styling the options in the dropdown */
+    background: #1e1e1e; /* Dark background for options in the list */
+    color: #fff; /* White text for options */
+}
+
+/* ======================================= */
+/* Button Styling (Admin Buttons) */
+/* ======================================= */
+
+/* Add/Update and Search Button */
+.admin-btn {
+  background-color: #f2aa01; /* Gold background */
+  color: #1e1e1e; /* Dark text */
+  border: 1px solid #f2aa01;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.admin-btn:hover {
+  background-color: #e09900; /* Slightly darker gold on hover */
+  transform: translateY(-1px);
+}
+
+/* Edit and Delete Buttons in the List */
+
+/* Edit Button */
+.btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+.btn-outline-light:hover {
+    color: #1e1e1e;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+/* Delete Button */
+.btn-danger {
+    background-color: #dc3545; /* Bootstrap Red */
+    border-color: #dc3545;
+    color: #fff;
+    transition: all 0.3s;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Specific styling for dropdown (select) and its options */
+/* Important: This ensures dropdown list items have a dark background */
+.form-control option {
+    background: #1e1e1e; 
+    color: #fff;
+}
