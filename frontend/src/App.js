@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Logout from "./components/Logout";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -12,7 +13,8 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
-import Logout from "./components/Logout";
+
+
 
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
@@ -20,11 +22,15 @@ import StudentDashboard from "./pages/StudentDashboard";
 // New pages
 import AdminProfile from "./pages/AdminProfile";
 import AdminSettings from "./pages/AdminSettings";
-import Exams from "./pages/Exams";
+import AvailableExams from "./pages/AvailableExams";
 import AdminSubjects from "./pages/AdminSubjects";
-import Questions from "./pages/Questions";
+import Questions from "./pages/AdminQuestions";
 import StudentProfile from "./pages/StudentProfile";
 import StudentSettings from "./pages/StudentSettings";
+import ExamBuilder from "./pages/ExamBuilder";
+import TopicsPage from "./pages/TopicsPage";
+import StudentAttempt from "./pages/StudentAttempt";
+import AttemptResult from "./pages/AttemptResult";
 
 function LayoutWithSidebar({ children, sidebarOpen, toggleSidebar }) {
   const role = localStorage.getItem("role");
@@ -79,6 +85,8 @@ function App() {
       "/admin-settings",
       "/student-profile",
       "/student-settings",
+      "/exams",              // ✅ ADD THIS
+      "/exam/", 
       // you can add more protected routes here
     ];
 
@@ -140,19 +148,7 @@ function App() {
             }
           />
 
-          <Route
-            path="/admin-exams"
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <LayoutWithSidebar
-                  sidebarOpen={sidebarOpen}
-                  toggleSidebar={toggleSidebar}
-                >
-                  <Exams />
-                </LayoutWithSidebar>
-              </ProtectedRoute>
-            }
-         />
+          
 
           <Route
             path="/admin-subjects"
@@ -208,6 +204,34 @@ function App() {
             }
           />
 
+          <Route 
+            path="/admin-exam-builder" 
+            element={ 
+              <ProtectedRoute requiredRole="admin">
+                <LayoutWithSidebar 
+                  sidebarOpen={sidebarOpen} 
+                  toggleSidebar={toggleSidebar}
+                >
+                  <ExamBuilder/>
+                </LayoutWithSidebar>
+              </ProtectedRoute> 
+            } 
+          />
+
+          <Route 
+            path="/admin-subjects/:id/topics" 
+            element={ 
+              <ProtectedRoute requiredRole="admin">
+                <LayoutWithSidebar 
+                  sidebarOpen={sidebarOpen} 
+                  toggleSidebar={toggleSidebar}
+                >
+                  <TopicsPage/>
+                </LayoutWithSidebar>
+              </ProtectedRoute> 
+            } 
+          />
+
           <Route
             path="/student-profile"
             element={
@@ -235,7 +259,29 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/attempt/:attemptId" element={
+            <ProtectedRoute requiredRole="student">
+              <LayoutWithSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar}>
+                <StudentAttempt />
+              </LayoutWithSidebar>
+            </ProtectedRoute>
+          } />
 
+          <Route path="/exams" element={
+            <ProtectedRoute requiredRole="student">
+              <LayoutWithSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar}>
+                <AvailableExams />
+              </LayoutWithSidebar>
+            </ProtectedRoute>
+          } />
+
+          <Route path="/attempt/:attemptId/result" element={
+            <ProtectedRoute requiredRole="student">
+              <LayoutWithSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar}>
+                <AttemptResult />
+              </LayoutWithSidebar>
+            </ProtectedRoute>
+          } />
           {/* Catch-all */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

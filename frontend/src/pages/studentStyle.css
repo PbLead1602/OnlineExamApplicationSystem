@@ -1,0 +1,172 @@
+/* === Student Area Theme === */
+.student-page {
+  position: relative;
+  min-height: 100vh;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 60px 0;
+}
+
+.student-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+
+.student-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.student-glass {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Buttons */
+.student-btn {
+  background: #ffd700;
+  color: #222;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px 18px;
+}
+.student-btn:hover {
+  background: #e0b800;
+  transform: scale(1.03);
+}
+
+/* Text */
+.student-heading { color: #ffd700; }
+.student-sub { color: #f2f2f2; }
+
+
+/* StudentAttempt.css */
+
+.attempt-page {
+  position: relative;
+  min-height: 100vh;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 40px 0;
+}
+
+.attempt-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7); /* Slightly darker for readability */
+  z-index: 0;
+}
+
+.attempt-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: auto;
+  color: white;
+}
+
+/* Glass Cards */
+.attempt-card,
+.attempt-nav-card {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.attempt-heading {
+  color: #ffd700;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+}
+
+/* Option Rows */
+.option-row {
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.option-row:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+/* Theme Buttons */
+.attempt-btn {
+  background: #ffd700;
+  color: #111;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.attempt-btn:hover {
+  background: #e0b800;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Scroller / State buttons */
+.attempt-answered {
+  background-color: #ffd700 !important;
+  color: #000 !important;
+  font-weight: bold;
+  border-color: #ffd700 !important;
+}
+
+/* Sticky behavior */
+.sticky-box {
+  position: sticky;
+  top: 90px;
+}
+
+/* Progress bar (if added later) */
+.progress-bar-gold {
+  background-color: #ffd700 !important;
+}
+
+.timer-box {
+  background: #2c2c2c;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #ffc107;
+  font-weight: bold;
+  border: 1px solid #444;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.timer-danger {
+  background: #4d0000 !important;
+  color: #ff4d4d !important;
+  border-color: #ff0000 !important;
+}
+
+.pulse-warning {
+  animation: pulse-red 1s infinite;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}

@@ -1,29 +1,44 @@
-// backend/middleware/authMiddleware.js
 const jwt = require("jsonwebtoken");
 
-// Protect middleware: checks if token exists & verifies it
-exports.protect = (req, res, next) => {
-  let token = req.headers.authorization?.split(" ")[1];
+/**
+ * AUTHENTICATION
+ */
+const protect = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Not authorized, no token" });
   }
 
   try {
+    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // contains { id, email, role }
+
+    req.user = decoded; // { id, email, role }
     next();
-  } catch (error) {
-    return res.status(401).json({ message: "Not authorized, token failed" });
+  } catch (err) {
+    return res.status(401).json({ message: "Token invalid" });
   }
 };
 
-// Authorize middleware: checks if role matches
-exports.authorize = (...roles) => {
+/**
+ * AUTHORIZATION (ROLE-BASED)
+ */
+const authorize = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return res.status(403).json({ message: "Forbidden: Access denied" });
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authenticated" });
     }
+
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
     next();
   };
+};
+
+module.exports = {
+  protect,
+  authorize,
 };

@@ -1,13 +1,17 @@
 import React from "react";
+import "./studentStyle.css"; 
 
 const StudentProfile = () => {
   const username = localStorage.getItem("username");
 
   return (
-    <div>
-      <h2>👤 Student Profile</h2>
-      <p>Hello, {username}</p>
-      <p>This is your profile page.</p>
+    <div className="student-page">
+      <div className="student-container">
+        <div className="student-glass">
+          <h2 className="student-heading">👤 Student Profile</h2>
+          <p className="student-sub">Name: {username}</p>
+        </div>
+      </div>
     </div>
   );
 };

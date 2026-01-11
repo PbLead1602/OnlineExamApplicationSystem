@@ -1,38 +1,48 @@
 // backend/models/Exam.js
-const pool = require("../config/db"); // your mysql2 promise pool
+const pool = require("../config/db");
 
-// Create exam
-exports.create = async ({ title, description, date, duration, created_by }) => {
-  const [result] = await pool.query(
-    "INSERT INTO exams (title, description, date, duration, created_by) VALUES (?, ?, ?, ?, ?)",
-    [title, description, date, duration, created_by]
-  );
-  return { id: result.insertId, title, description, date, duration, created_by };
-};
-
-// Get all exams
+// Get all exams (admin)
 exports.findAll = async () => {
-  const [rows] = await pool.query("SELECT * FROM exams ORDER BY date DESC");
+  const [rows] = await pool.query(
+    "SELECT * FROM exams ORDER BY created_at DESC"
+  );
   return rows;
 };
 
 // Get exam by ID
 exports.getById = async (id) => {
-  const [rows] = await pool.query("SELECT * FROM exams WHERE id = ?", [id]);
-  return rows;
+  const [rows] = await pool.query(
+    "SELECT * FROM exams WHERE id = ?",
+    [id]
+  );
+  return rows[0];
 };
 
-// Update exam
+// Update exam metadata (NOT questions)
 exports.update = async (id, { title, description, date, duration }) => {
   const [result] = await pool.query(
-    "UPDATE exams SET title = ?, description = ?, date = ?, duration = ? WHERE id = ?",
+    `UPDATE exams 
+     SET title = ?, description = ?, date = ?, duration = ?
+     WHERE id = ?`,
     [title, description, date, duration, id]
   );
   return result;
 };
 
-// Delete exam
+// Delete exam (cascade should delete exam_questions)
 exports.delete = async (id) => {
-  const [result] = await pool.query("DELETE FROM exams WHERE id = ?", [id]);
+  const [result] = await pool.query(
+    "DELETE FROM exams WHERE id = ?",
+    [id]
+  );
   return result;
+};
+
+// Exams available for students
+// Available for students (Removed 'status' column check since it's missing in your DB)
+exports.getAvailableForStudent = async () => {
+  const [rows] = await pool.query(
+    "SELECT * FROM exams ORDER BY date DESC"
+  );
+  return rows;
 };

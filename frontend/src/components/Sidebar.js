@@ -25,7 +25,7 @@ const Sidebar = ({ role, onLogout, isOpen, toggleSidebar }) => {
           { path: "/admin-settings", label: "Settings", icon: <Settings size={18} /> },
           { path: "/manage-users", label: "Manage Users", icon: <Users size={18} /> },
           { path: "/admin-subjects", label: "Subjects", icon: <BookOpen size={18} /> },
-          { path: "/admin-exams", label: "Exams", icon: <ClipboardList size={18} /> },
+          { path: "/admin-exam-builder", label: "Create Exams", icon: <ClipboardList size={18} /> },
           { path: "/admin-questions", label: "Questions", icon: <ClipboardList size={18} /> },
           { path: "/admin-reports", label: "Reports", icon: <BarChart size={18} /> },
         ]
@@ -33,7 +33,7 @@ const Sidebar = ({ role, onLogout, isOpen, toggleSidebar }) => {
           { path: "/student-dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
           { path: "/student-profile", label: "Profile", icon: <User size={18} /> },
           { path: "/student-settings", label: "Settings", icon: <Settings size={18} /> },
-          { path: "/assigned-exams", label: "Assigned Exams", icon: <BookOpen size={18} /> },
+          { path: "/exams", label: "Available Exams", icon: <BookOpen size={18} /> },
           { path: "/results", label: "Results", icon: <Award size={18} /> },
         ];
 

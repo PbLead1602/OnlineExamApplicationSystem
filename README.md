@@ -123,3 +123,11 @@ ONLINEEXAM/
 ##  Project Overview
 This system enables administrators to manage subjects, exams, and questions in one place.  
 Students can log in, take exams, and view their results (in progress).
+
+
+---
+
+##  Author
+
+**Priya Bodade**  
+GitHub: @PbLead1602

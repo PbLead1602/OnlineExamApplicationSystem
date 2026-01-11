@@ -1,0 +1,71 @@
+/* === Shared Admin Glass Theme === */
+.admin-page {
+  position: relative;
+  min-height: 100vh;
+  background: url("../exam.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 40px 0;
+  color: white;
+}
+
+.admin-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75); /* Dark overlay */
+  z-index: 0;
+}
+
+.admin-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reusing your attempt-card style for Admin */
+.admin-glass-card {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.admin-heading {
+  color: #ffd700;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-btn-gold {
+  background: #ffd700;
+  color: #111;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: 0.3s;
+}
+
+.admin-btn-gold:hover {
+  background: #e0b800;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* List Items as Option Rows */
+.admin-list-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+  color: white;
+}
+
+.admin-list-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffd700;
+}

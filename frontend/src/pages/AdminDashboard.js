@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { BarChart, Users, ClipboardList } from "lucide-react";
+import "./admin.css";
 
 const AdminDashboard = () => {
   const username = localStorage.getItem("username");
