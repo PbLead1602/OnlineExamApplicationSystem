@@ -1,15 +1,17 @@
 // backend/models/Exam.js
 const pool = require("../config/db");
 
-// Get all exams (admin)
+// Updated: Includes Subject Join for the Manage Exams table
 exports.findAll = async () => {
   const [rows] = await pool.query(
-    "SELECT * FROM exams ORDER BY created_at DESC"
+    `SELECT e.*, s.name as subject_name 
+     FROM exams e 
+     LEFT JOIN subjects s ON e.subject_id = s.id 
+     ORDER BY e.created_at DESC`
   );
   return rows;
 };
 
-// Get exam by ID
 exports.getById = async (id) => {
   const [rows] = await pool.query(
     "SELECT * FROM exams WHERE id = ?",
@@ -18,7 +20,6 @@ exports.getById = async (id) => {
   return rows[0];
 };
 
-// Update exam metadata (NOT questions)
 exports.update = async (id, { title, description, date, duration }) => {
   const [result] = await pool.query(
     `UPDATE exams 
@@ -29,8 +30,9 @@ exports.update = async (id, { title, description, date, duration }) => {
   return result;
 };
 
-// Delete exam (cascade should delete exam_questions)
 exports.delete = async (id) => {
+  // Ensure your MySQL DB has ON DELETE CASCADE on exam_questions table 
+  // Otherwise, you'd need to manually delete from exam_questions first.
   const [result] = await pool.query(
     "DELETE FROM exams WHERE id = ?",
     [id]
@@ -38,8 +40,6 @@ exports.delete = async (id) => {
   return result;
 };
 
-// Exams available for students
-// Available for students (Removed 'status' column check since it's missing in your DB)
 exports.getAvailableForStudent = async () => {
   const [rows] = await pool.query(
     "SELECT * FROM exams ORDER BY date DESC"

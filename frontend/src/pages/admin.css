@@ -1,10 +1,11 @@
-/* === Shared Admin Glass Theme === */
+/* === Admin Area Theme === */
 .admin-page {
   position: relative;
   min-height: 100vh;
+  /* Using the same background as student area for consistency */
   background: url("../exam.jpg") no-repeat center center/cover;
   background-attachment: fixed;
-  padding: 40px 0;
+  padding: 60px 0;
   color: white;
 }
 
@@ -12,60 +13,305 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75); /* Dark overlay */
+  /* Matching the student-page dark overlay */
+  background: rgba(0, 0, 0, 0.75); 
   z-index: 0;
 }
 
 .admin-container {
   position: relative;
   z-index: 1;
+  max-width: 1200px;
+  margin: auto;
 }
 
-/* Reusing your attempt-card style for Admin */
+/* Glass Cards - Merged style from attempt-card and student-glass */
 .admin-glass-card {
-  background: rgba(255, 255, 255, 0.10);
-  border-radius: 15px;
-  padding: 25px;
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 30px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  margin-bottom: 20px;
+  transition: transform 0.3s ease;
 }
 
+.admin-glass-card:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+/* Gold Heading Style */
 .admin-heading {
-  color: #ffd700;
+  color: #ffd700; /* Gold */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Gold Button Style */
 .admin-btn-gold {
-  background: #ffd700;
-  color: #111;
-  border: none;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 10px 20px;
-  transition: 0.3s;
+  background: #ffd700 !important;
+  color: #111 !important;
+  border: none !important;
+  font-weight: bold !important;
+  border-radius: 10px !important;
+  padding: 12px 20px !important;
+  transition: all 0.3s ease !important;
 }
 
 .admin-btn-gold:hover {
-  background: #e0b800;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+  background: #e0b800 !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
-/* List Items as Option Rows */
+/* List Items (for future tables/lists in admin) */
 .admin-list-item {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  transition: 0.3s;
-  color: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  transition: 0.3s ease;
 }
 
 .admin-list-item:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: #ffd700;
+  transform: translateX(5px);
+}
+
+/* Add this to your admin.css for form elements */
+.form-control, .form-select {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+}
+
+.form-control:focus, .form-select:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2) !important;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Progress Chart Elements */
+.progress-bg {
+  background: rgba(255, 255, 255, 0.05);
+  height: 12px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ensure admin list items in reports look like widgets */
+.admin-list-item h3 {
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+/* Recharts Tooltip Customization */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.recharts-default-tooltip {
+  background-color: rgba(20, 20, 20, 0.9) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.05);
+}
+
+
+/* === Table Styling === */
+.admin-table {
+  background: transparent !important;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-table thead th {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffd700 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 15px 20px !important;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.admin-table-row {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-table-row:hover {
+  background: rgba(255, 215, 0, 0.05) !important;
+}
+
+.admin-table td {
+  padding: 15px 20px !important;
+  vertical-align: middle;
+  border: none !important;
+}
+
+/* Avatar Circle */
+.avatar-circle {
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Glass Search Input */
+.glass-input-group {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-input {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  padding: 10px !important;
+}
+
+.glass-input:focus {
+  box-shadow: none !important;
+}
+
+/* === Table Styling === */
+.admin-table {
+  background: transparent !important;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-table thead th {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffd700 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 15px 20px !important;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.admin-table-row {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-table-row:hover {
+  background: rgba(255, 215, 0, 0.05) !important;
+}
+
+.admin-table td {
+  padding: 15px 20px !important;
+  vertical-align: middle;
+  border: none !important;
+}
+
+/* Avatar Circle */
+.avatar-circle {
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Glass Search Input */
+.glass-input-group {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-input {
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  padding: 10px !important;
+}
+
+.glass-input:focus {
+  box-shadow: none !important;
+}
+
+/* Styling for Select Dropdowns in Glass Theme */
+select.glass-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,215,0,0.8)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+select.glass-input option {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.avatar-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Spin animation for the refresh button */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-animation {
+  animation: spin 1s linear infinite;
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.5);
+  color: #ffd700;
 }

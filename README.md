@@ -16,16 +16,27 @@ Built using **Node.js (Express)**, **React.js**, and **MySQL**, with secure JWT-
 
 ##  Key Features (Implemented )
 ###  Admin
-- Register & login with secure JWT authentication  
-- Manage subjects (Add, Update, Delete)  
-- Manage questions (Add, View, Search)  
-- Manage exams linked with subjects  
-- Role-based access control (Admin/Student)
+✔ Register & login with JWT authentication
+✔ Manage subjects
+✔ Manage exams
+✔ Manage questions
+✔ Assign questions to exams
+❌ Exam analytics dashboard (In progress)
+❌ Student performance reports (Planned)
+
 
 ###  Student
-- Register & login  
-- View available exams  
-- Take exams (module in progress )
+✔ Register & Login with JWT authentication
+✔ View available exams (date-based status)
+✔ Start exam with timer
+✔ Auto-save answers during attempt
+✔ Submit exam manually or automatically on timeout
+✔ View detailed result with:
+  - Score
+  - Correct / Incorrect / Skipped count
+  - Question-wise review
+  - Option highlighting
+
 
 ---
 

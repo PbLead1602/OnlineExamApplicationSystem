@@ -14,6 +14,7 @@ const topicRoutes = require("./routes/topicRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const examQuestionRoutes = require("./routes/examQuestionRoutes");
 const examAttemptRoutes = require("./routes/examAttemptRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
@@ -36,6 +37,7 @@ app.use("/api/topics", topicRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/exam-questions", examQuestionRoutes);
 app.use("/api/exam-attempt", examAttemptRoutes);
+app.use("/api/users", userRoutes);
 
 // Error handling
 app.use(notFound);

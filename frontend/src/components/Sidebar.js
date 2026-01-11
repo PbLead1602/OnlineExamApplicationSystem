@@ -8,6 +8,7 @@ import {
   Users,
   BookOpen,
   ClipboardList,
+  Trophy,
   BarChart,
   Award,
 } from "lucide-react";
@@ -23,10 +24,12 @@ const Sidebar = ({ role, onLogout, isOpen, toggleSidebar }) => {
           { path: "/admin-dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
           { path: "/admin-profile", label: "Profile", icon: <User size={18} /> },
           { path: "/admin-settings", label: "Settings", icon: <Settings size={18} /> },
-          { path: "/manage-users", label: "Manage Users", icon: <Users size={18} /> },
+          { path: "/manage-students", label: "Manage Students", icon: <Users size={18} /> },
           { path: "/admin-subjects", label: "Subjects", icon: <BookOpen size={18} /> },
           { path: "/admin-exam-builder", label: "Create Exams", icon: <ClipboardList size={18} /> },
           { path: "/admin-questions", label: "Questions", icon: <ClipboardList size={18} /> },
+          { path: "/admin-exams", label: "Manage Exams", icon: <ClipboardList size={18} /> },
+          { path: "/admin-results", label: "Exam Results", icon: <Trophy size={18} /> },
           { path: "/admin-reports", label: "Reports", icon: <BarChart size={18} /> },
         ]
       : [

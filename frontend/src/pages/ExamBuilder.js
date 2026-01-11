@@ -1,38 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./exambuilder.css";
+import "./admin.css"; // Ensure this uses your shared glass theme
 
 const AdminCreateExam = ({ editExamId = null }) => {
   const token = localStorage.getItem("token");
-
-  // Step control
   const [step, setStep] = useState(1);
-
-  // Exam data
-  const [exam, setExam] = useState({
-    title: "",
-    description: "",
-    date: "",
-    duration: ""
-  });
-
-  // Subject + Questions
+  const [exam, setExam] = useState({ title: "", description: "", date: "", duration: "" });
   const [subjects, setSubjects] = useState([]);
   const [subjectId, setSubjectId] = useState("");
   const [questions, setQuestions] = useState([]);
   const [selectedQ, setSelectedQ] = useState(new Set());
 
-  // Load subjects
   useEffect(() => {
-    axios
-      .get("/api/subjects", {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(res => setSubjects(res.data))
-      .catch(console.error);
+    axios.get("/api/subjects", { headers: { Authorization: `Bearer ${token}` } })
+      .then(res => setSubjects(res.data)).catch(console.error);
   }, [token]);
 
-  // Load questions by subject
   const loadQuestions = async (sid) => {
     const res = await axios.get("/api/questions", {
       headers: { Authorization: `Bearer ${token}` },
@@ -41,136 +24,101 @@ const AdminCreateExam = ({ editExamId = null }) => {
     setQuestions(res.data);
   };
 
-  // Toggle question
   const toggleQuestion = (id) => {
     const copy = new Set(selectedQ);
     copy.has(id) ? copy.delete(id) : copy.add(id);
     setSelectedQ(copy);
   };
 
-  // Auto-random selection
-  const autoSelect = (count = 5) => {
-    if (questions.length < count) {
-      alert("Not enough questions");
-      return;
-    }
-    const shuffled = [...questions].sort(() => 0.5 - Math.random());
-    const ids = shuffled.slice(0, count).map(q => q.id);
-    setSelectedQ(new Set(ids));
-  };
-
-  // Publish exam
   const publishExam = async () => {
-    if (selectedQ.size < 5) {
-      return alert("Minimum 5 questions required");
-    }
-
-  const payload = {
-    title: exam.title,
-    description: exam.description,
-    date: exam.date,
-    duration: exam.duration,
-    subject_Id: Number(subjectId),
-    question_Ids: Array.from(selectedQ)
-  };
-
-
+    if (selectedQ.size < 5) return alert("Minimum 5 questions required");
+    const payload = { ...exam, subject_Id: Number(subjectId), question_Ids: Array.from(selectedQ) };
     try {
-      await axios.post(
-        "/api/exams",
-        payload,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axios.post("/api/exams", payload, { headers: { Authorization: `Bearer ${token}` } });
       alert("Exam published successfully");
       window.location.href = "/admin/exams";
-    } catch (err) {
-      alert("Publish failed");
-    }
+    } catch (err) { alert("Publish failed"); }
   };
 
   return (
-    <div className="container mt-4 text-white">
+    <div className="admin-page">
+      <div className="container admin-container">
+        <div className="admin-glass-card">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h2 className="admin-heading mb-0">{editExamId ? "Edit Exam" : "Create New Exam"}</h2>
+            <span className="badge bg-warning text-dark">Step {step} of 4</span>
+          </div>
 
-      <h2 className="text-warning mb-3">
-        {editExamId ? "Edit Exam" : "Create New Exam"}
-      </h2>
-
-      {/* STEP 1 */}
-      {step === 1 && (
-        <div className="card p-4">
-          <input placeholder="Title" className="form-control mb-2"
-            onChange={e => setExam({ ...exam, title: e.target.value })} />
-          <textarea placeholder="Description" className="form-control mb-2"
-            onChange={e => setExam({ ...exam, description: e.target.value })} />
-          <input type="date" className="form-control mb-2"
-            onChange={e => setExam({ ...exam, date: e.target.value })} />
-          <input type="number" placeholder="Duration (min)" className="form-control"
-            onChange={e => setExam({ ...exam, duration: e.target.value })} />
-
-          <button className="btn btn-warning mt-3" onClick={() => setStep(2)}>
-            Next →
-          </button>
-        </div>
-      )}
-
-      {/* STEP 2 */}
-      {step === 2 && (
-        <div className="card p-4">
-          <select className="form-control"
-            value={subjectId}
-            onChange={(e) => {
-              setSubjectId(e.target.value);
-              loadQuestions(e.target.value);
-            }}>
-            <option value="">Select Subject</option>
-            {subjects.map(s => (
-              <option key={s.id} value={s.id}>{s.name}</option>
-            ))}
-          </select>
-
-          <button className="btn btn-warning mt-3" onClick={() => setStep(3)}>
-            Next →
-          </button>
-        </div>
-      )}
-
-      {/* STEP 3 */}
-      {step === 3 && (
-        <div className="card p-4">
-          <button className="btn btn-outline-warning mb-2"
-            onClick={() => autoSelect(5)}>
-            Auto Pick 5 Questions
-          </button>
-
-          {questions.map(q => (
-            <div key={q.id} className="form-check">
-              <input
-                type="checkbox"
-                checked={selectedQ.has(q.id)}
-                onChange={() => toggleQuestion(q.id)}
-              />
-              <label className="ms-2">{q.question_text}</label>
+          {/* STEP 1: Basic Info */}
+          {step === 1 && (
+            <div className="admin-list-item p-4">
+              <input placeholder="Exam Title" className="form-control bg-dark text-white border-secondary mb-3"
+                onChange={e => setExam({ ...exam, title: e.target.value })} />
+              <textarea placeholder="Description" className="form-control bg-dark text-white border-secondary mb-3"
+                onChange={e => setExam({ ...exam, description: e.target.value })} />
+              <div className="row">
+                <div className="col-md-6">
+                  <input type="date" className="form-control bg-dark text-white border-secondary mb-3"
+                    onChange={e => setExam({ ...exam, date: e.target.value })} />
+                </div>
+                <div className="col-md-6">
+                  <input type="number" placeholder="Duration (min)" className="form-control bg-dark text-white border-secondary mb-3"
+                    onChange={e => setExam({ ...exam, duration: e.target.value })} />
+                </div>
+              </div>
+              <button className="admin-btn-gold w-100" onClick={() => setStep(2)}>Next Step →</button>
             </div>
-          ))}
+          )}
 
-          <button className="btn btn-warning mt-3" onClick={() => setStep(4)}>
-            Preview →
-          </button>
+          {/* STEP 2: Subject Selection */}
+          {step === 2 && (
+            <div className="admin-list-item p-4 text-center">
+              <h5 className="text-white mb-3">Select Subject</h5>
+              <select className="form-select bg-dark text-white border-secondary mb-4"
+                value={subjectId} onChange={(e) => { setSubjectId(e.target.value); loadQuestions(e.target.value); }}>
+                <option value="">Choose Subject...</option>
+                {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+              </select>
+              <button className="admin-btn-gold w-100" onClick={() => setStep(3)}>Next: Select Questions →</button>
+            </div>
+          )}
+
+          {/* STEP 3: Question Selection */}
+          {step === 3 && (
+            <div>
+              <div className="d-flex justify-content-between mb-3">
+                 <p className="text-white-50">Selected: {selectedQ.size}</p>
+                 <button className="btn btn-sm btn-outline-warning" onClick={() => {
+                    const ids = questions.slice(0, 5).map(q => q.id);
+                    setSelectedQ(new Set(ids));
+                 }}>Auto-pick 5</button>
+              </div>
+              <div className="overflow-auto" style={{maxHeight: '400px'}}>
+                {questions.map(q => (
+                  <div key={q.id} className="admin-list-item d-flex align-items-center">
+                    <input type="checkbox" className="form-check-input me-3" 
+                      checked={selectedQ.has(q.id)} onChange={() => toggleQuestion(q.id)} />
+                    <label className="text-white mb-0">{q.question_text}</label>
+                  </div>
+                ))}
+              </div>
+              <button className="admin-btn-gold w-100 mt-3" onClick={() => setStep(4)}>Preview Exam →</button>
+            </div>
+          )}
+
+          {/* STEP 4: Preview & Publish */}
+          {step === 4 && (
+            <div className="admin-list-item p-4">
+              <h4 className="text-warning border-bottom border-secondary pb-2">Exam Preview</h4>
+              <p className="mt-3"><b>Title:</b> {exam.title}</p>
+              <p><b>Duration:</b> {exam.duration} Minutes</p>
+              <p><b>Questions:</b> {selectedQ.size} Selected</p>
+              <button className="btn btn-success w-100 py-3 mt-4 fw-bold" onClick={publishExam}>PUBLISH EXAM NOW</button>
+              <button className="btn btn-link text-white-50 w-100 mt-2" onClick={() => setStep(1)}>Go Back</button>
+            </div>
+          )}
         </div>
-      )}
-
-      {/* STEP 4 */}
-      {step === 4 && (
-        <div className="card p-4">
-          <h4 className="text-warning">Exam Preview</h4>
-          <p><b>Title:</b> {exam.title}</p>
-          <p><b>Questions:</b> {selectedQ.size}</p>
-
-          <button className="btn btn-success" onClick={publishExam}>
-            Publish Exam
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

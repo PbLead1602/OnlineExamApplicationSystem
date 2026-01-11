@@ -1,31 +1,50 @@
 const db = require("../config/db");
 const Exam = require("../models/Exam");
 
+/**
+ * GET ALL EXAMS (ADMIN) - Updated with Subject Name Join
+ */
+exports.getAllExams = async (req, res) => {
+  try {
+    // We use the promise-based query to keep it consistent with your other code
+    const sql = `
+      SELECT e.*, s.name as subject_name 
+      FROM exams e 
+      LEFT JOIN subjects s ON e.subject_id = s.id 
+      ORDER BY e.date DESC
+    `;
+    
+    const [exams] = await db.query(sql);
+    res.json(exams);
+  } catch (err) {
+    console.error("Error in getAllExams:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+/**
+ * CREATE EXAM WITH QUESTIONS
+ */
 exports.createExamWithQuestions = async (req, res) => {
-  console.log("Request Body Received:", req.body); // Check your terminal for this!
+  console.log("Request Body Received:", req.body);
 
   const { title, description, date, duration, subject_Id, question_Ids } = req.body;
 
-  // Validation
   if (!title || !duration || !subject_Id || !Array.isArray(question_Ids)) {
     return res.status(400).json({
       success: false,
-      message: "Invalid payload: Ensure title, duration, subjectId, and question_Ids (array) are present."
+      message: "Invalid payload: Ensure title, duration, subjectId, and question_Ids are present."
     });
   }
 
   if (question_Ids.length < 5) {
-    return res.status(400).json({
-      success: false,
-      message: "Minimum 5 questions required."
-    });
+    return res.status(400).json({ success: false, message: "Minimum 5 questions required." });
   }
 
   const conn = await db.getConnection();
   try {
     await conn.beginTransaction();
 
-    // 1️⃣ Create exam (Match columns: title, description, date, duration, subject_id, created_by)
     const [examResult] = await conn.query(
       `INSERT INTO exams (title, description, date, duration, subject_id, created_by)
        VALUES (?, ?, ?, ?, ?, ?)`,
@@ -34,7 +53,6 @@ exports.createExamWithQuestions = async (req, res) => {
 
     const examId = examResult.insertId;
 
-    // 2️⃣ Attach questions
     for (const qid of question_Ids) {
       await conn.query(
         "INSERT INTO exam_questions (exam_id, question_id) VALUES (?, ?)",
@@ -50,22 +68,6 @@ exports.createExamWithQuestions = async (req, res) => {
     res.status(500).json({ success: false, message: "DB Error: " + err.message });
   } finally {
     conn.release();
-  }
-};
-
-// ... keep other exports (getAllExams, getExamById, etc.) as they were
-
-  
-
-/**
- * GET ALL EXAMS (ADMIN)
- */
-exports.getAllExams = async (req, res) => {
-  try {
-    const exams = await Exam.findAll();
-    res.json(exams);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
 };
 

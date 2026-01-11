@@ -30,7 +30,11 @@ import StudentSettings from "./pages/StudentSettings";
 import ExamBuilder from "./pages/ExamBuilder";
 import TopicsPage from "./pages/TopicsPage";
 import StudentAttempt from "./pages/StudentAttempt";
+import AdminReports from "./pages/AdminReports";
 import AttemptResult from "./pages/AttemptResult";
+import ManageStudents from "./pages/ManageStudents";
+import ManageExams from "./pages/ManageExams";
+import ViewResults from "./pages/viewResult"; 
 
 function LayoutWithSidebar({ children, sidebarOpen, toggleSidebar }) {
   const role = localStorage.getItem("role");
@@ -87,6 +91,10 @@ function App() {
       "/student-settings",
       "/exams",              // ✅ ADD THIS
       "/exam/", 
+      "/admin-reports",
+      "/manage-students",
+      "/admin-results"
+
       // you can add more protected routes here
     ];
 
@@ -184,6 +192,59 @@ function App() {
                   toggleSidebar={toggleSidebar}
                 >
                   <AdminSettings />
+                </LayoutWithSidebar>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin-reports"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <LayoutWithSidebar
+                  sidebarOpen={sidebarOpen}
+                  toggleSidebar={toggleSidebar}
+                >
+                  <AdminReports />
+                </LayoutWithSidebar>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin-exams" // This path matches what we'll use in Sidebar/Dashboard
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <LayoutWithSidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar}>
+                  <ManageExams />
+                </LayoutWithSidebar>
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/manage-students"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <LayoutWithSidebar
+                  sidebarOpen={sidebarOpen}
+                  toggleSidebar={toggleSidebar}
+                >
+                  <ManageStudents />
+                </LayoutWithSidebar>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin-results"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <LayoutWithSidebar
+                  sidebarOpen={sidebarOpen}
+                  toggleSidebar={toggleSidebar}
+                >
+                  <ViewResults />
                 </LayoutWithSidebar>
               </ProtectedRoute>
             }
